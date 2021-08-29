@@ -20,7 +20,7 @@ import android.widget.Toast;
 public class SignupFragment extends Fragment {
     boolean isUserValidated = false;
     Button validateBtn, clearBtn, registerBtn;
-    EditText nameEditText,emailEditText,ageEditText,phoneEditText;
+    EditText nameEditText,emailEditText,ageEditText,phoneEditText,passwordEditText,reenterpasswordEditText;
     TextView validationStatusTv;
 
     @Override
@@ -41,6 +41,8 @@ public class SignupFragment extends Fragment {
         emailEditText = view.findViewById(R.id.emailEditText);
         ageEditText = view.findViewById(R.id.ageEditText);
         phoneEditText = view.findViewById(R.id.phoneEditText);
+        passwordEditText = view.findViewById(R.id.passwordEditText);
+        reenterpasswordEditText = view.findViewById(R.id.reenterpasswordEditText);
 
         validationStatusTv = view.findViewById(R.id.validationStatusTv);
 
@@ -87,8 +89,10 @@ public class SignupFragment extends Fragment {
                 String email = emailEditText.getText().toString();
                 String age = ageEditText.getText().toString();
                 String phone = phoneEditText.getText().toString();
+                String password1 = passwordEditText.getText().toString();
+                String password2 = reenterpasswordEditText.getText().toString();
 
-                if(name.length()==0 || email.length()==0 || age.length()==0 || phone.length()==0)
+                if(name.length()==0 || email.length()==0 || age.length()==0 || phone.length()==0 || password1.length()==0 || password2.length()==0)
                 {
                     Toast.makeText(getActivity(), "Not all fields were filled!", Toast.LENGTH_LONG).show();
                     isUserValidated = false;
@@ -101,6 +105,11 @@ public class SignupFragment extends Fragment {
                 else if(email.indexOf('@')==-1 || email.indexOf('.')==-1 || email.indexOf('@')==email.length()-1 || email.indexOf('.')==email.length()-1)
                 {
                     Toast.makeText(getActivity(), "Check Email Address Format", Toast.LENGTH_LONG).show();
+                    isUserValidated = false;
+                }
+                else if(!password1.equals(password2))
+                {
+                    Toast.makeText(getActivity(), "Enter matching passwords", Toast.LENGTH_LONG).show();
                     isUserValidated = false;
                 }
                 else
@@ -156,7 +165,11 @@ public class SignupFragment extends Fragment {
             public void onClick(View v) {
                 if(isUserValidated==true)
                 {
-                    Toast.makeText(getActivity(),"Registering User",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"Registering User...Proceed to Login",Toast.LENGTH_SHORT).show();
+
+                    //TEMPORARY ADDITION - Go To Login on Click
+                    Button loginTriggerFragmentBtn = getActivity().findViewById(R.id.loginFragTrigger);
+                    loginTriggerFragmentBtn.performClick();
                 }
                 else
                 {
