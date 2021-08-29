@@ -61,6 +61,8 @@ public class SignupFragment extends Fragment {
                         emailEditText.setText("");
                         ageEditText.setText("");
                         phoneEditText.setText("");
+                        passwordEditText.setText("");
+                        reenterpasswordEditText.setText("");
                         isUserValidated = false;
                         validationStatusTv.setText("NOT VALIDATED");
                         validationStatusTv.setTextColor(Color.RED);
