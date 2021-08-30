@@ -3,25 +3,32 @@ package com.example.movierecommendationapp;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class SignupFragment extends Fragment {
     boolean isUserValidated = false;
-    Button validateBtn, clearBtn, registerBtn;
+    Button validateBtn, clearBtn, registerBtn, profilePicBtn;
     EditText nameEditText,emailEditText,ageEditText,phoneEditText,passwordEditText,reenterpasswordEditText;
     TextView validationStatusTv;
+    ImageView dpImageView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +43,8 @@ public class SignupFragment extends Fragment {
         validateBtn = view.findViewById(R.id.validateBtn);
         clearBtn = view.findViewById(R.id.clearBtn);
         registerBtn = view.findViewById(R.id.registerBtn);
+        profilePicBtn = view.findViewById(R.id.profilePicBtn);
+        dpImageView = view.findViewById(R.id.dpImageView);
 
         nameEditText = view.findViewById(R.id.nameEditText);
         emailEditText = view.findViewById(R.id.emailEditText);
@@ -180,6 +189,45 @@ public class SignupFragment extends Fragment {
             }
         });
 
+        //Profile Pic Button handler
+        profilePicBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String[] options = { "Take Photo","Cancel" };
+                AlertDialog.Builder dpAlertDialog = new AlertDialog.Builder(getActivity());
+                dpAlertDialog.setTitle("Choose your profile picture");
+
+                dpAlertDialog.setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int item) {
+                        if (options[item].equals("Take Photo")) {
+                            Intent takePicture = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                            startActivityForResult(takePicture, 0);
+                        } else if (options[item].equals("Cancel")) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+                dpAlertDialog.setCancelable(false);
+                dpAlertDialog.show();
+            }
+        });
+
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if(resultCode != getActivity().RESULT_CANCELED) {
+            switch (requestCode) {
+                case 0:
+                    if (resultCode == getActivity().RESULT_OK && data != null) {
+                        Bitmap selectedImage = (Bitmap) data.getExtras().get("data");
+                        dpImageView.setImageBitmap(selectedImage);
+                    }
+                    break;
+            }
+        }
     }
 }
