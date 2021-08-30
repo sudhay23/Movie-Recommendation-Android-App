@@ -10,8 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieRecommendationApp">
         <activity
+            android:name=".ProfileActivity"
+            android:exported="true" />
+        <activity
             android:name=".UserLoginSignupActivity"
-            android:theme="@style/Theme.MovieRecommendationApp.RemoveActionBar"/>
+            android:theme="@style/Theme.MovieRecommendationApp.RemoveActionBar" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

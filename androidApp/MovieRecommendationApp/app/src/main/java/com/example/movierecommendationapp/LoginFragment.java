@@ -2,6 +2,7 @@ package com.example.movierecommendationapp;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -33,13 +34,21 @@ public class LoginFragment extends Fragment {
         emailEditText = view.findViewById(R.id.emailEditText);
         passwordEditText = view.findViewById(R.id.passwordEditText);
 
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
         clearBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
                 alertDialog.setTitle("Clear Fields");
                 alertDialog.setMessage("Are you sure to clear?");
-                alertDialog.setIcon(R.drawable.ic_baseline_warning_24);
+                alertDialog.setIcon(R.drawable.ic_launcher_foreground);
                 alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
