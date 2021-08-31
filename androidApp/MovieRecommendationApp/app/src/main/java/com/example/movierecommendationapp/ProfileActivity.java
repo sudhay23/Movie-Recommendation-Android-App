@@ -2,6 +2,7 @@ package com.example.movierecommendationapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +33,13 @@ public class ProfileActivity extends AppCompatActivity implements UpdateProfileD
             @Override
             public void onClick(View v) {
                 openDialog();
+            }
+        });
+        btnSurfMovies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),ShowMoviesActivity.class);
+                startActivity(intent);
             }
         });
 

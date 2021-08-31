@@ -63,7 +63,7 @@
         app:layout_constraintHorizontal_bias="0.127"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="0.147" />
+        app:layout_constraintVertical_bias="0.156" />
 
     <TextView
         android:id="@+id/userName"
@@ -75,10 +75,10 @@
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.407"
+        app:layout_constraintHorizontal_bias="0.403"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="0.147" />
+        app:layout_constraintVertical_bias="0.160" />
 
     <TextView
         android:id="@+id/textView3"
@@ -89,11 +89,11 @@
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintHorizontal_bias="0.127"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.108" />
+        app:layout_constraintVertical_bias="0.062" />
 
     <TextView
         android:id="@+id/userEmail"
@@ -107,7 +107,7 @@
         app:layout_constraintHorizontal_bias="0.418"
         app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/userName"
-        app:layout_constraintVertical_bias="0.108" />
+        app:layout_constraintVertical_bias="0.076" />
 
     <TextView
         android:id="@+id/textView5"
@@ -122,7 +122,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
 
-        app:layout_constraintVertical_bias="0.108" />
+        app:layout_constraintVertical_bias="0.062" />
 
     <TextView
         android:id="@+id/userPassword"
@@ -137,7 +137,7 @@
         app:layout_constraintHorizontal_bias="0.376"
         app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/userEmail"
-        app:layout_constraintVertical_bias="0.128" />
+        app:layout_constraintVertical_bias="0.078" />
 
     <TextView
         android:id="@+id/textView7"
@@ -151,7 +151,7 @@
         app:layout_constraintHorizontal_bias="0.124"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:layout_constraintVertical_bias="0.109" />
+        app:layout_constraintVertical_bias="0.062" />
 
     <TextView
         android:id="@+id/userAge"
@@ -165,7 +165,7 @@
         app:layout_constraintHorizontal_bias="0.409"
         app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/userPassword"
-        app:layout_constraintVertical_bias="0.111" />
+        app:layout_constraintVertical_bias="0.065" />
 
     <Button
         android:id="@+id/updateProfileBtn"
@@ -175,10 +175,10 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.397"
+        app:layout_constraintHorizontal_bias="0.396"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7"
-        app:layout_constraintVertical_bias="0.273" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.229" />
 
     <Button
         android:id="@+id/surfMoviesBtn"
@@ -192,6 +192,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/updateProfileBtn"
         app:layout_constraintVertical_bias="0.179" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone         :"
+        android:textSize="28sp"
+
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        app:layout_constraintVertical_bias="0.062" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="8667615041"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.322"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/userAge"
+        app:layout_constraintVertical_bias="0.082" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
