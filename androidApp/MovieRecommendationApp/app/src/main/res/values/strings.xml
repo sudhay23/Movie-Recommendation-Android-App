@@ -2,7 +2,7 @@
     <string name="app_name">MovieRecommendationApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="movies_recommended_for_you">Movies recommonded for you:)</string>
+    <string name="movies_recommended_for_you">Movies recommended for you</string>
     <string name="todo">todo</string>
     <string name="hang_over_n_ncomedy">Hang over\n\nComedy\n\n8.8/10</string>
     <string name="todo2">todo2</string>
