@@ -46,9 +46,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/jonsnowround" /><![CDATA[/>
-
-    ]]>
+        app:srcCompat="@drawable/jonsnowround" />
 
     <TextView
         android:id="@+id/textView"
