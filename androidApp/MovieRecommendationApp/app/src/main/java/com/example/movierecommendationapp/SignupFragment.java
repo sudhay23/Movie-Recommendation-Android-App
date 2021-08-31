@@ -1,8 +1,10 @@
 package com.example.movierecommendationapp;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -177,6 +179,27 @@ public class SignupFragment extends Fragment {
                 if(isUserValidated==true)
                 {
                     Toast.makeText(getActivity(),"Registering User...Proceed to Login",Toast.LENGTH_SHORT).show();
+
+                    SharedPreferences preferences = requireContext().getSharedPreferences("Register", Context.MODE_PRIVATE);
+                    String name = nameEditText.getText().toString();
+                    String email = emailEditText.getText().toString();
+                    String password = passwordEditText.getText().toString();
+                    String age = ageEditText.getText().toString();
+                    String phno = phoneEditText.getText().toString();
+
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("Name",name);
+                    editor.putString("Email",email);
+                    editor.putString("Password",password);
+                    editor.putString("Age",age);
+                    editor.putString("Phno",phno);
+                    editor.commit();
+
+
+
+
+
+
 
                     //TEMPORARY ADDITION - Go To Login on Click
                     Button loginTriggerFragmentBtn = getActivity().findViewById(R.id.loginFragTrigger);
