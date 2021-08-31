@@ -15,6 +15,9 @@
             android:name=".ProfileActivity"
             android:exported="true" />
         <activity
+            android:name=".movieslist"
+            android:exported="true" />
+        <activity
             android:name=".UserLoginSignupActivity"
             android:theme="@style/Theme.MovieRecommendationApp.RemoveActionBar" />
         <activity android:name=".MainActivity">
