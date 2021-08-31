@@ -79,7 +79,7 @@ public class movieslist extends Activity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ShowMoviesActivity.class);
+                Intent intent = new Intent(getApplicationContext(), recommendedmovies.class);
                 intent.putExtra("mylist", mylist);
                 startActivity(intent);
             }
