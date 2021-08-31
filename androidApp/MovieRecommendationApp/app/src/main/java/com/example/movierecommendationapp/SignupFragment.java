@@ -45,7 +45,6 @@ public class SignupFragment extends Fragment {
         registerBtn = view.findViewById(R.id.registerBtn);
         profilePicBtn = view.findViewById(R.id.profilePicBtn);
         dpImageView = view.findViewById(R.id.dpImageView);
-
         nameEditText = view.findViewById(R.id.nameEditText);
         emailEditText = view.findViewById(R.id.emailEditText);
         ageEditText = view.findViewById(R.id.ageEditText);
