@@ -48,7 +48,7 @@ public class LoginFragment extends Fragment {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
                 alertDialog.setTitle("Clear Fields");
                 alertDialog.setMessage("Are you sure to clear?");
-                alertDialog.setIcon(R.drawable.ic_launcher_foreground);
+                alertDialog.setIcon(R.drawable.ic_baseline_warning_24);
                 alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
