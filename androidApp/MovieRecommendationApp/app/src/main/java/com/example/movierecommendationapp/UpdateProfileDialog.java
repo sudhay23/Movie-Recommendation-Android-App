@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 public class UpdateProfileDialog extends AppCompatDialogFragment {
     private EditText editTextName;
-    private EditText editTextEmail;
+    private EditText editTextPhone;
     private EditText editTextPassword;
     private EditText editTextAge;
 
@@ -39,15 +39,15 @@ public class UpdateProfileDialog extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String name = editTextName.getText().toString();
-                        String email= editTextEmail.getText().toString();
+                        String phone= editTextPhone.getText().toString();
                         String password = editTextPassword.getText().toString();
                         String age = editTextAge.getText().toString();
-                        listener.applyTexts(name,email,password,age);
+                        listener.applyTexts(name,phone,password,age);
                     }
                 });
 
         editTextName = view.findViewById(R.id.dialogUserName);
-        editTextEmail = view.findViewById(R.id.dialogUserEmail);
+        editTextPhone = view.findViewById(R.id.dialogUserPhone);
         editTextPassword = view.findViewById(R.id.dialogUserPassword);
         editTextAge = view.findViewById(R.id.dialogUserAge);
 
@@ -68,6 +68,6 @@ public class UpdateProfileDialog extends AppCompatDialogFragment {
     }
 
     public interface ExampleDialogListener {
-        void applyTexts(String name, String email, String username, String password);
+        void applyTexts(String name, String phone, String username, String password);
     }
 }
