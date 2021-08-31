@@ -1,8 +1,10 @@
 package com.example.movierecommendationapp;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -13,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class LoginFragment extends Fragment {
 
@@ -37,8 +40,32 @@ public class LoginFragment extends Fragment {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),ProfileActivity.class);
-                startActivity(intent);
+
+
+                SharedPreferences preferences = requireContext().getSharedPreferences("Register", Context.MODE_PRIVATE);
+                String registeredEmail = preferences.getString("Email", "emailNotRegistered");
+                String registeredPassword = preferences.getString("Password", "passwordNotMatching");
+
+                if(emailEditText.getText().toString().equals(registeredEmail)){
+                    if(passwordEditText.getText().toString().equals(registeredPassword)){
+                        Toast.makeText(getActivity(),"Login Successful",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getContext(),ProfileActivity.class);
+                        startActivity(intent);
+
+                    }
+                    else {
+                        Toast.makeText(getActivity(),"Incorrect Password",Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+                else{
+                    Toast.makeText(getActivity(),"Email not registered",Toast.LENGTH_SHORT).show();
+
+                }
+
+
+
+
             }
         });
 
