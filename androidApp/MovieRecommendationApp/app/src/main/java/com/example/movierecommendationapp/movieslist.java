@@ -61,7 +61,7 @@ public class movieslist extends Activity {
         listView.addHeaderView(textView);
 
         // For populating list data
-        customcountrylist customCountryList = new customcountrylist(this, moviename, movietype, imageid);
+        custommovielist customCountryList = new custommovielist(this, moviename, movietype, imageid);
         listView.setAdapter(customCountryList);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

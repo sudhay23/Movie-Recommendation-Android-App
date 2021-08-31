@@ -24,7 +24,7 @@
         android:padding="20dp"
 
         android:drawSelectorOnTop="false"
-        android:listSelector="@android:color/white"
+        android:listSelector="@android:color/darker_gray"
         android:layout_height="wrap_content"
         />
     <Button

@@ -30,7 +30,7 @@
         android:layout_columnWeight="1"
         android:layout_marginLeft="10dp"
         android:textSize="15dp"
-        android:textColor="@color/orange"
+        android:textColor="@color/black"
         android:id="@+id/textViewCapital"
         android:layout_row="1"
         android:layout_column="1" />

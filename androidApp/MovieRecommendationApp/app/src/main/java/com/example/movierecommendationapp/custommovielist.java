@@ -11,22 +11,22 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-public class customcountrylist extends ArrayAdapter {
-    private String[] countryNames;
-    private String[] capitalNames;
+public class custommovielist extends ArrayAdapter {
+    private String[] moviename;
+    private String[] movietype;
     private Integer[] imageid;
     private Activity context;
 
-    public customcountrylist(Activity context, String[] countryNames, String[] capitalNames, Integer[] imageid) {
-        super(context, R.layout.row_item, countryNames);
+    public custommovielist(Activity context, String[] moviename, String[] movietype, Integer[] imageid) {
+        super(context, R.layout.row_item, moviename);
         this.context = context;
-        this.countryNames = countryNames;
-        this.capitalNames = capitalNames;
+        this.moviename = moviename;
+        this.movietype = movietype;
         this.imageid = imageid;
 
     }
 
-    public customcountrylist(@NonNull Context context, int resource) {
+    public custommovielist(@NonNull Context context, int resource) {
         super(context, resource);
     }
 
@@ -40,8 +40,8 @@ public class customcountrylist extends ArrayAdapter {
         TextView textViewCapital = (TextView) row.findViewById(R.id.textViewCapital);
         ImageView imageFlag = (ImageView) row.findViewById(R.id.imageViewFlag);
 
-        textViewCountry.setText(countryNames[position]);
-        textViewCapital.setText(capitalNames[position]);
+        textViewCountry.setText(moviename[position]);
+        textViewCapital.setText(movietype[position]);
         imageFlag.setImageResource(imageid[position]);
         return  row;
     }
