@@ -4,15 +4,15 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="movies_recommended_for_you">Movies recommended for you</string>
     <string name="todo">todo</string>
-    <string name="hang_over_n_ncomedy">Hang over\n\nComedy\n\n8.8/10</string>
+    <string name="hang_over_n_ncomedy"> Hang over\n\n Comedy\n\n 8.8/10</string>
     <string name="todo2">todo2</string>
-    <string name="curse_the_nun_n_nthriller">Curse the nun\n\nThriller\n\n7.6/10</string>
+    <string name="curse_the_nun_n_nthriller"> Curse the nun\n\n Thriller\n\n 7.6/10</string>
     <string name="todo3">todo3</string>
-    <string name="conjuring_3_n_nhorror">Conjuring 3\n\nHorror\n\n8.2/10</string>
+    <string name="conjuring_3_n_nhorror"> Conjuring 3\n\n Horror\n\n 8.2/10</string>
     <string name="todo4">todo4</string>
-    <string name="sky_lines_n_naction">Sky lines\n\nAction\n\n7.9/10</string>
-    <string name="titanic_n_nromance">Titanic\n\nRomance\n\n9.2/10</string>
-    <string name="zodiac_n_nmysery">Zodiac\n\nMysery\n\n6.9/10</string>
+    <string name="sky_lines_n_naction"> Sky lines\n\n Action\n\n 7.9/10</string>
+    <string name="titanic_n_nromance"> Titanic\n\n Romance\n\n 9.2/10</string>
+    <string name="zodiac_n_nmysery"> Zodiac\n\n Mysery\n\n 6.9/10</string>
     <string name="todo6">todo6</string>
     <string name="todo5">todo5</string>
 </resources>
