@@ -11,13 +11,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginLeft="15dp"
         android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textview"
+            android:paddingLeft="15dp"
             android:text="@string/movies_recommended_for_you"
+            android:layout_marginBottom="10dp"
             android:textColor="@color/black"
             android:gravity="center"
             android:fontFamily="sans-serif-smallcaps"
