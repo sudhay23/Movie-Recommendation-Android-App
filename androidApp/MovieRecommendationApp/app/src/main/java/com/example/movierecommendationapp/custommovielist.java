@@ -12,16 +12,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 public class custommovielist extends ArrayAdapter {
-    private String[] moviename;
-    private String[] movietype;
-    private Integer[] imageid;
-    private Activity context;
+   String[] moviename;
+   String[] movietype;
+   String[] imdb;
+    Integer[] imageid;
+    Activity context;
 
-    public custommovielist(Activity context, String[] moviename, String[] movietype, Integer[] imageid) {
+    public custommovielist(Activity context, String[] moviename, String[] movietype,String[] imdb, Integer[] imageid) {
         super(context, R.layout.row_item, moviename);
         this.context = context;
         this.moviename = moviename;
         this.movietype = movietype;
+        this.imdb=imdb;
         this.imageid = imageid;
 
     }
@@ -36,12 +38,14 @@ public class custommovielist extends ArrayAdapter {
         LayoutInflater inflater = context.getLayoutInflater();
         if(convertView==null)
             row = inflater.inflate(R.layout.row_item, null, true);
-        TextView textViewCountry = (TextView) row.findViewById(R.id.textViewCountry);
-        TextView textViewCapital = (TextView) row.findViewById(R.id.textViewCapital);
+        TextView textViewmovie = (TextView) row.findViewById(R.id.textViewmovie);
+        TextView textViewtype = (TextView) row.findViewById(R.id.textViewtype);
+        TextView textViewimdb = (TextView) row.findViewById(R.id.textViewimdb);
         ImageView imageFlag = (ImageView) row.findViewById(R.id.imageViewFlag);
 
-        textViewCountry.setText(moviename[position]);
-        textViewCapital.setText(movietype[position]);
+        textViewmovie.setText(moviename[position]);
+        textViewtype.setText(movietype[position]);
+        textViewimdb.setText(imdb[position]);
         imageFlag.setImageResource(imageid[position]);
         return  row;
     }

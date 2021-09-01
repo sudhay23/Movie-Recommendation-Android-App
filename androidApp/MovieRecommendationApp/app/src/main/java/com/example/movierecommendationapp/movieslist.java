@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class movieslist extends Activity {
     ListView listView;
     Button b1;
-    int i=0;
+
     String moviename[] = {
             "Johnny English Strikes\nAgain",
             "The Tomorrow War",
@@ -25,7 +25,7 @@ public class movieslist extends Activity {
             "Tamasha",
             "Zodiac"
     };
-    String[] selectedmovies;
+
     ArrayList<String> mylist = new ArrayList<String>();
 
     String movietype[] = {
@@ -35,6 +35,15 @@ public class movieslist extends Activity {
             "thriller",
             "romance",
             "mystery"
+    };
+
+    String imdb[] = {
+            "IMDB:7.4",
+            "IMDB:9.1",
+            "IMDB:6.8",
+            "IMDB:8.2",
+            "IMDB:8.4",
+            "IMDB:7.9"
     };
 
 
@@ -61,8 +70,8 @@ public class movieslist extends Activity {
         listView.addHeaderView(textView);
 
         // For populating list data
-        custommovielist customCountryList = new custommovielist(this, moviename, movietype, imageid);
-        listView.setAdapter(customCountryList);
+        custommovielist custommovielist = new custommovielist(this, moviename, movietype,imdb,imageid);
+        listView.setAdapter(custommovielist);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
