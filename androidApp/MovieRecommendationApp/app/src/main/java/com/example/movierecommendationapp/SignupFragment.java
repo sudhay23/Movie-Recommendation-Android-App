@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
@@ -25,12 +26,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+
 public class SignupFragment extends Fragment {
     boolean isUserValidated = false;
     Button validateBtn, clearBtn, registerBtn, profilePicBtn;
     EditText nameEditText,emailEditText,ageEditText,phoneEditText,passwordEditText,reenterpasswordEditText;
     TextView validationStatusTv;
     ImageView dpImageView;
+    DAOUser dao;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,7 @@ public class SignupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_signup, container, false);
+        dao = new DAOUser();
 
         validateBtn = view.findViewById(R.id.validateBtn);
         clearBtn = view.findViewById(R.id.clearBtn);
@@ -194,7 +200,20 @@ public class SignupFragment extends Fragment {
                     editor.putString("Phno",phno);
                     editor.commit();
 
-
+                    //Save the information on Firebase
+                    User new_user = new User(name, phno,email,password,Integer.parseInt(age)); 
+                    dao.addUser(new_user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(getActivity(), "Welcome, you are now registered.", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(Exception e) {
+                            Toast.makeText(getActivity(), "Issues occurred in saving to Database.", Toast.LENGTH_SHORT).show();
+                            Log.d("SignupError",e.getMessage());
+                        }
+                    });
 
 
 
