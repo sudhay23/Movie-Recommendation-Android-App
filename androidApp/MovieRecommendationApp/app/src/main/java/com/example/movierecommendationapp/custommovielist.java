@@ -11,22 +11,24 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-public class customcountrylist extends ArrayAdapter {
-    private String[] countryNames;
-    private String[] capitalNames;
-    private Integer[] imageid;
-    private Activity context;
+public class custommovielist extends ArrayAdapter {
+   String[] moviename;
+   String[] movietype;
+   String[] imdb;
+    Integer[] imageid;
+    Activity context;
 
-    public customcountrylist(Activity context, String[] countryNames, String[] capitalNames, Integer[] imageid) {
-        super(context, R.layout.row_item, countryNames);
+    public custommovielist(Activity context, String[] moviename, String[] movietype,String[] imdb, Integer[] imageid) {
+        super(context, R.layout.row_item, moviename);
         this.context = context;
-        this.countryNames = countryNames;
-        this.capitalNames = capitalNames;
+        this.moviename = moviename;
+        this.movietype = movietype;
+        this.imdb=imdb;
         this.imageid = imageid;
 
     }
 
-    public customcountrylist(@NonNull Context context, int resource) {
+    public custommovielist(@NonNull Context context, int resource) {
         super(context, resource);
     }
 
@@ -36,12 +38,14 @@ public class customcountrylist extends ArrayAdapter {
         LayoutInflater inflater = context.getLayoutInflater();
         if(convertView==null)
             row = inflater.inflate(R.layout.row_item, null, true);
-        TextView textViewCountry = (TextView) row.findViewById(R.id.textViewCountry);
-        TextView textViewCapital = (TextView) row.findViewById(R.id.textViewCapital);
+        TextView textViewmovie = (TextView) row.findViewById(R.id.textViewmovie);
+        TextView textViewtype = (TextView) row.findViewById(R.id.textViewtype);
+        TextView textViewimdb = (TextView) row.findViewById(R.id.textViewimdb);
         ImageView imageFlag = (ImageView) row.findViewById(R.id.imageViewFlag);
 
-        textViewCountry.setText(countryNames[position]);
-        textViewCapital.setText(capitalNames[position]);
+        textViewmovie.setText(moviename[position]);
+        textViewtype.setText(movietype[position]);
+        textViewimdb.setText(imdb[position]);
         imageFlag.setImageResource(imageid[position]);
         return  row;
     }
