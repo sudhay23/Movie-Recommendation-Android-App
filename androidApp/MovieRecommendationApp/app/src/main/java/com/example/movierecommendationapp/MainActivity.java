@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.movierecommendationapp.cardview.CardViewActivity;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener  {
     Button startBtn;
     int i;
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if(v.getId()==startBtn.getId())
         {
-            Intent intent = new Intent(MainActivity.this,UserLoginSignupActivity.class);
+            Intent intent = new Intent(MainActivity.this, CardViewActivity.class);
             startActivity(intent);
         }
     }

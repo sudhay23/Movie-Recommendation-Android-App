@@ -21,14 +21,13 @@
         />
 
     <ListView
-        android:id="@+id/android:list"
+        android:id="@+id/listviewmovies"
         android:layout_width="match_parent"
-        android:padding="20dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/title"
         android:drawSelectorOnTop="false"
         android:listSelector="@android:color/darker_gray"
-        android:layout_height="wrap_content"
-        />
+        android:padding="20dp" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
