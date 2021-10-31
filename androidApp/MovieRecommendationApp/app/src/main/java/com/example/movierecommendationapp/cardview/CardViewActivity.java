@@ -40,5 +40,11 @@ public class CardViewActivity extends AppCompatActivity {
     private void CreateDataForCards() {
         CardMovieDetails movie= new CardMovieDetails("Spiderman","10/10","New Marvel Spiderman movie starring Tom Holland");
         moviesArrayList.add(movie);
+
+        movie= new CardMovieDetails("Spiderman","10/10","New Marvel Spiderman movie starring Tom Holland");
+        moviesArrayList.add(movie);
+
+        movie= new CardMovieDetails("Spiderman","10/10","New Marvel Spiderman movie starring Tom Holland");
+        moviesArrayList.add(movie);
     }
 }
