@@ -19,4 +19,12 @@
                 android:title="Stay here"/>
         </menu>
     </item>
+    <item
+        android:id="@+id/favoritesItem"
+        android:title="My Favorites"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/recommendationItem"
+        android:title="View Recommendations"
+        app:showAsAction="never"/>
 </menu>

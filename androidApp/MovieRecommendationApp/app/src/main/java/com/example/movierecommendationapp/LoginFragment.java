@@ -52,8 +52,13 @@ public class LoginFragment extends Fragment {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = emailEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
+                String email = emailEditText.getText().toString().trim();
+                String password = passwordEditText.getText().toString().trim();
+                if(email.length()==0 || password.length()==0)
+                {
+                    Toast.makeText(getActivity(), "Fill in all fields", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
 //                SharedPreferences preferences = requireContext().getSharedPreferences("Register", Context.MODE_PRIVATE);
 //                String registeredEmail = preferences.getString("Email", "emailNotRegistered");
