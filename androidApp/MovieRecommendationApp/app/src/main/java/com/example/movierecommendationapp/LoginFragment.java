@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.movierecommendationapp.cardview.CardViewActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -54,9 +55,9 @@ public class LoginFragment extends Fragment {
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
-                SharedPreferences preferences = requireContext().getSharedPreferences("Register", Context.MODE_PRIVATE);
-                String registeredEmail = preferences.getString("Email", "emailNotRegistered");
-                String registeredPassword = preferences.getString("Password", "passwordNotMatching");
+//                SharedPreferences preferences = requireContext().getSharedPreferences("Register", Context.MODE_PRIVATE);
+//                String registeredEmail = preferences.getString("Email", "emailNotRegistered");
+//                String registeredPassword = preferences.getString("Password", "passwordNotMatching");
 
                 DocumentReference doc = db.collection("users").document(email);
                 doc.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -72,7 +73,7 @@ public class LoginFragment extends Fragment {
                             if(documentSnapshot.getString("password").equals(password))
                             {
                                 Toast.makeText(getActivity(), "Login Success...", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getContext(),ProfileActivity.class);
+                                Intent intent = new Intent(getContext(), CardViewActivity.class);
                                 startActivity(intent);
                             }
                             else
