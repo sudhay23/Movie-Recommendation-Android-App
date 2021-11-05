@@ -26,6 +26,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.movierecommendationapp.MainActivity;
 import com.example.movierecommendationapp.ProfileActivity;
 import com.example.movierecommendationapp.R;
+import com.example.movierecommendationapp.favorites.FavoritesActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -156,6 +157,10 @@ public class CardViewActivity extends AppCompatActivity {
                 logoutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 logoutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(logoutIntent);
+                return true;
+            case R.id.favoritesItem:
+                Intent favIntent = new Intent(this, FavoritesActivity.class);
+                startActivity(favIntent);
                 return true;
         }
 

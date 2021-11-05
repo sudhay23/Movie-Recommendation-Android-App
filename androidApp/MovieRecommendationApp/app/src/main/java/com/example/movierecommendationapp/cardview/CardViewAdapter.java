@@ -86,7 +86,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.MovieV
                     Map<String,Object> newFavorite = new HashMap<>();
                     newFavorite.put("email",loggedInUser);
                     newFavorite.put("favMovieId",details.getMovieId());
-                    db.collection("FavoriteMovies").add(newFavorite).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    db.collection("favoriteMovies").add(newFavorite).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
                             Toast.makeText(context, "Added "+details.getMovieName()+" as favorite", Toast.LENGTH_SHORT).show();
