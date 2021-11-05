@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -37,7 +39,7 @@ public class CardViewActivity extends AppCompatActivity {
     private ArrayList<CardMovieDetails> moviesArrayList;
 
     private RequestQueue mQueue;
-
+    private ProgressBar progressBar;
 
 
 
@@ -53,39 +55,54 @@ public class CardViewActivity extends AppCompatActivity {
         recyclerView=findViewById(R.id.recyclerViewCard);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         moviesArrayList=new ArrayList<>();
+        progressBar=(ProgressBar)findViewById(R.id.progress_bar) ;
 
 
         mQueue= Volley.newRequestQueue(this);
+        progressBarVisible();
         jsonParse();
-        CreateDataForCards("Kabhi kushi kabhi gham","6.9","aaa aaa aaa aaa");
-        CreateDataForCards("Kabhi kushi kabhi gham","6.9","aaa aaa aaa aaa");
+//        CreateDataForCards("Kabhi kushi kabhi gham","6.9","aaa aaa aaa aaa");
+  //      CreateDataForCards("Kabhi kushi kabhi gham","6.9","aaa aaa aaa aaa");
+
         adapter=new CardViewAdapter(this,moviesArrayList);
         recyclerView.setAdapter(adapter);
 
+
+    }
+    public void progressBarVisible(){
+        progressBar.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
     }
 
+    public void progressBarInVisible(){
+        progressBar.setVisibility(View.INVISIBLE);
+        recyclerView.setVisibility(View.VISIBLE);
+    }
     private void jsonParse() {
         String URL="https://movie-recommender-fastapi.herokuapp.com";
         JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 JSONArray keys = response.names ();
-
+                progressBarInVisible();
                 for (int i = 0; i < keys.length(); i++) {
                     try {
                         String movie_name=(response.getJSONObject((String) keys.get(i)).getString("original_title"));
                         String description=(response.getJSONObject((String) keys.get(i)).getString("tagline"));
                         String ratings=(response.getJSONObject((String) keys.get(i)).getString("vote_average"));
+                      //  String ratings=(response.getJSONObject((String) keys.get(i)).getString("vote_average"));
+
 
                         CreateDataForCards(movie_name,description,ratings);
+                        adapter.notifyDataSetChanged();
 
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                adapter.notifyDataSetChanged();
-                Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
+
+              //  Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
             }
         }, new Response.ErrorListener() {
             @Override
