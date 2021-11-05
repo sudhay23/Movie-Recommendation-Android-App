@@ -26,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="194dp"
             app:srcCompat="@drawable/jonsnow"
+            android:id="@+id/movieImage"
             android:scaleType="centerCrop"
             android:contentDescription="@string/app_name"
             />
@@ -76,6 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:text="Add to favorites"
+                android:id="@+id/addToFavButton"
                 style="?attr/borderlessButtonStyle"
                 />
 
