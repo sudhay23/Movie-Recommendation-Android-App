@@ -3,17 +3,38 @@ package com.example.movierecommendationapp.cardview;
 import android.view.View;
 
 public class CardMovieDetails {
+    private String movieId;
     private String movieName;
     private String ratings;
     private String movieDescription;
     private String backDropPath;
+    private String posterPath;
 
-    public CardMovieDetails(String movieName, String ratings, String movieDescription, String backDropPath) {
+    public CardMovieDetails(String movieId, String movieName, String ratings, String movieDescription, String backDropPath, String posterPath) {
+        this.movieId=movieId;
         this.movieName = movieName;
         this.ratings = ratings;
         this.movieDescription = movieDescription;
         this.backDropPath=backDropPath;
+        this.posterPath=posterPath;
 
+
+    }
+
+    public String getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(String movieId) {
+        this.movieId = movieId;
+    }
+
+    public String getPosterPath() {
+        return posterPath;
+    }
+
+    public void setPosterPath(String posterPath) {
+        this.posterPath = posterPath;
     }
 
     public String getBackDropPath() {

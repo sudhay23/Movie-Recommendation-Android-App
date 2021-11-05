@@ -87,13 +87,15 @@ public class CardViewActivity extends AppCompatActivity {
                 progressBarInVisible();
                 for (int i = 0; i < keys.length(); i++) {
                     try {
+                        String movieId=(String)keys.get(i);
                         String movie_name=(response.getJSONObject((String) keys.get(i)).getString("original_title"));
                         String description=(response.getJSONObject((String) keys.get(i)).getString("tagline"));
                         String ratings=(response.getJSONObject((String) keys.get(i)).getString("vote_average"));
                         String backDropPath=(response.getJSONObject((String) keys.get(i)).getString("backdrop_path"));
-                        System.out.println(backDropPath);
+                        String posterPath=(response.getJSONObject((String) keys.get(i)).getString("poster_path"));
 
-                        CreateDataForCards(movie_name,description,ratings,backDropPath);
+
+                        CreateDataForCards(movieId,movie_name,description,ratings,backDropPath,posterPath);
                         adapter.notifyDataSetChanged();
 
 
@@ -113,8 +115,9 @@ public class CardViewActivity extends AppCompatActivity {
         mQueue.add(request);
     }
 
-    private void CreateDataForCards(String movieName, String ratings, String movieDescription, String backDropPath) {
-        CardMovieDetails movie= new CardMovieDetails(movieName,ratings,movieDescription,backDropPath);
+    private void CreateDataForCards(String movieId,String movieName, String ratings, String movieDescription, String backDropPath, String posterPath) {
+        CardMovieDetails movie= new CardMovieDetails(movieId,movieName,ratings,movieDescription,backDropPath,posterPath);
+        System.out.println(movieId+" "+movieName+" "+ratings+" "+movieDescription+" "+backDropPath+" "+posterPath);
         moviesArrayList.add(movie);
 
     }
