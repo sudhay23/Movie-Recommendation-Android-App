@@ -78,6 +78,10 @@ public class LoginFragment extends Fragment {
                             if(documentSnapshot.getString("password").equals(password))
                             {
                                 Toast.makeText(getActivity(), "Login Success...", Toast.LENGTH_SHORT).show();
+                                SharedPreferences prefs = getActivity().getSharedPreferences("LoggedIn",Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = prefs.edit();
+                                editor.putString("loggedin",email);
+                                editor.commit();
                                 Intent intent = new Intent(getContext(), CardViewActivity.class);
                                 startActivity(intent);
                             }
