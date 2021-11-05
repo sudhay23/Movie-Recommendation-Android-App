@@ -90,14 +90,15 @@ public class CardViewActivity extends AppCompatActivity {
                     try {
                         String movieId=(String)keys.get(i);
                         String movie_name=(response.getJSONObject((String) keys.get(i)).getString("original_title"));
-                        String description=(response.getJSONObject((String) keys.get(i)).getString("tagline"));
-                        String ratings=(response.getJSONObject((String) keys.get(i)).getString("vote_average"));
+                        String description=(response.getJSONObject((String) keys.get(i)).getString("overview"));
+                        String ratings="Ratings : "+(response.getJSONObject((String) keys.get(i)).getString("vote_average"))+"/10";
                         String backDropPath=(response.getJSONObject((String) keys.get(i)).getString("backdrop_path"));
                         String posterPath=(response.getJSONObject((String) keys.get(i)).getString("poster_path"));
 
                         if(description.length()>0){
                         CreateDataForCards(movieId,movie_name,description,ratings,backDropPath,posterPath);
-                        adapter.notifyDataSetChanged();}
+                        adapter.notifyDataSetChanged();
+                        }
 
 
                     } catch (JSONException e) {
