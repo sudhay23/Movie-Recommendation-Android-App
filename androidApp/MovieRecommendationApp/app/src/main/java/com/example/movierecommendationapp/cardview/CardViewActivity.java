@@ -94,9 +94,9 @@ public class CardViewActivity extends AppCompatActivity {
                         String backDropPath=(response.getJSONObject((String) keys.get(i)).getString("backdrop_path"));
                         String posterPath=(response.getJSONObject((String) keys.get(i)).getString("poster_path"));
 
-
+                        if(description.length()>0){
                         CreateDataForCards(movieId,movie_name,description,ratings,backDropPath,posterPath);
-                        adapter.notifyDataSetChanged();
+                        adapter.notifyDataSetChanged();}
 
 
                     } catch (JSONException e) {
