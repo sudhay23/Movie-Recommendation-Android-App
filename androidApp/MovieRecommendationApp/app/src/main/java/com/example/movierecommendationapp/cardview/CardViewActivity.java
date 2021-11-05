@@ -11,10 +11,19 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.movierecommendationapp.MainActivity;
 import com.example.movierecommendationapp.ProfileActivity;
 import com.example.movierecommendationapp.R;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -23,6 +32,9 @@ public class CardViewActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CardViewAdapter adapter;
     private ArrayList<CardMovieDetails> moviesArrayList;
+
+    private RequestQueue mQueue;
+
 
 
 
@@ -41,8 +53,25 @@ public class CardViewActivity extends AppCompatActivity {
 
         adapter=new CardViewAdapter(this,moviesArrayList);
         recyclerView.setAdapter(adapter);
-        
+        mQueue= Volley.newRequestQueue(this);
+        jsonParse();
         CreateDataForCards();
+    }
+
+    private void jsonParse() {
+        String URL="https://movie-recommender-fastapi.herokuapp.com";
+        JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        mQueue.add(request);
     }
 
     private void CreateDataForCards() {
