@@ -53,6 +53,8 @@ public class FavoritesActivity extends AppCompatActivity {
         db.collection("favoriteMovies").whereEqualTo("email",loggedInEmail).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                JSONObject postMovieIds = new JSONObject();
+
                 List<DocumentSnapshot> allSnaps = queryDocumentSnapshots.getDocuments();
                 for(DocumentSnapshot snapshot: allSnaps)
                 {
@@ -60,11 +62,18 @@ public class FavoritesActivity extends AppCompatActivity {
                     allFavMovieIds.add(snapshot.getString("favMovieId"));
                 }
                 tempHolder.setText(ans);
+                try {
+                    postMovieIds.put("movieIds",allFavMovieIds);
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
 
                 //Send POST request to backend
                 mQueue = Volley.newRequestQueue(FavoritesActivity.this);
                 String URL="https://movie-recommender-fastapi.herokuapp.com/favorites";
-                JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, NULLLforNOW, new Response.Listener<JSONObject>() {
+                JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, postMovieIds, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
 
@@ -76,7 +85,7 @@ public class FavoritesActivity extends AppCompatActivity {
                     }
                 });
 
-
+                mQueue.add(request);
                 
             }
         }).addOnFailureListener(new OnFailureListener() {
