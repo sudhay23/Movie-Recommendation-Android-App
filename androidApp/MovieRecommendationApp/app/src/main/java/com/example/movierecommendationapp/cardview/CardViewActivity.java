@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,6 +24,8 @@ import com.example.movierecommendationapp.MainActivity;
 import com.example.movierecommendationapp.ProfileActivity;
 import com.example.movierecommendationapp.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -51,11 +54,14 @@ public class CardViewActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         moviesArrayList=new ArrayList<>();
 
-        adapter=new CardViewAdapter(this,moviesArrayList);
-        recyclerView.setAdapter(adapter);
+
         mQueue= Volley.newRequestQueue(this);
         jsonParse();
-        CreateDataForCards();
+        CreateDataForCards("Kabhi kushi kabhi gham","6.9","aaa aaa aaa aaa");
+        CreateDataForCards("Kabhi kushi kabhi gham","6.9","aaa aaa aaa aaa");
+        adapter=new CardViewAdapter(this,moviesArrayList);
+        recyclerView.setAdapter(adapter);
+
     }
 
     private void jsonParse() {
@@ -63,6 +69,22 @@ public class CardViewActivity extends AppCompatActivity {
         JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                JSONArray keys = response.names ();
+
+                for (int i = 0; i < keys.length(); i++) {
+                    try {
+                        String movie_name=(response.getJSONObject((String) keys.get(i)).getString("original_title"));
+                        String description=(response.getJSONObject((String) keys.get(i)).getString("tagline"));
+                        String ratings=(response.getJSONObject((String) keys.get(i)).getString("vote_average"));
+
+                        CreateDataForCards(movie_name,description,ratings);
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                adapter.notifyDataSetChanged();
                 Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
             }
         }, new Response.ErrorListener() {
@@ -74,15 +96,11 @@ public class CardViewActivity extends AppCompatActivity {
         mQueue.add(request);
     }
 
-    private void CreateDataForCards() {
-        CardMovieDetails movie= new CardMovieDetails("Spiderman","10/10","New Marvel Spiderman movie starring Tom Holland");
+    private void CreateDataForCards(String movieName, String ratings, String movieDescription) {
+        CardMovieDetails movie= new CardMovieDetails(movieName,ratings,movieDescription);
+        System.out.println(movieName+" "+ ratings+" "+movieDescription);
         moviesArrayList.add(movie);
 
-        movie= new CardMovieDetails("Spiderman","10/10","New Marvel Spiderman movie starring Tom Holland");
-        moviesArrayList.add(movie);
-
-        movie= new CardMovieDetails("Spiderman","10/10","New Marvel Spiderman movie starring Tom Holland");
-        moviesArrayList.add(movie);
     }
 
     //Header menu

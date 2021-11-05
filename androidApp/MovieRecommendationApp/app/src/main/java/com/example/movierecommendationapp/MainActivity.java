@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if(v.getId()==startBtn.getId())
         {
-            Intent intent = new Intent(MainActivity.this, UserLoginSignupActivity.class);
+            Intent intent = new Intent(MainActivity.this, CardViewActivity.class);
             startActivity(intent);
         }
     }
