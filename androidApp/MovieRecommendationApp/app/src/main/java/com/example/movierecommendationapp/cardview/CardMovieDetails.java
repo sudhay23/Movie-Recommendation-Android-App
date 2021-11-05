@@ -6,14 +6,23 @@ public class CardMovieDetails {
     private String movieName;
     private String ratings;
     private String movieDescription;
+    private String backDropPath;
 
-    public CardMovieDetails(String movieName, String ratings, String movieDescription) {
+    public CardMovieDetails(String movieName, String ratings, String movieDescription, String backDropPath) {
         this.movieName = movieName;
         this.ratings = ratings;
         this.movieDescription = movieDescription;
+        this.backDropPath=backDropPath;
+
     }
 
+    public String getBackDropPath() {
+        return backDropPath;
+    }
 
+    public void setBackDropPath(String backDropPath) {
+        this.backDropPath = backDropPath;
+    }
 
     public String getMovieName() {
         return movieName;

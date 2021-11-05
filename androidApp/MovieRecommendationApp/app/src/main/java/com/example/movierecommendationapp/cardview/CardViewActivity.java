@@ -90,10 +90,10 @@ public class CardViewActivity extends AppCompatActivity {
                         String movie_name=(response.getJSONObject((String) keys.get(i)).getString("original_title"));
                         String description=(response.getJSONObject((String) keys.get(i)).getString("tagline"));
                         String ratings=(response.getJSONObject((String) keys.get(i)).getString("vote_average"));
-                      //  String ratings=(response.getJSONObject((String) keys.get(i)).getString("vote_average"));
+                        String backDropPath=(response.getJSONObject((String) keys.get(i)).getString("backdrop_path"));
+                        System.out.println(backDropPath);
 
-
-                        CreateDataForCards(movie_name,description,ratings);
+                        CreateDataForCards(movie_name,description,ratings,backDropPath);
                         adapter.notifyDataSetChanged();
 
 
@@ -113,9 +113,8 @@ public class CardViewActivity extends AppCompatActivity {
         mQueue.add(request);
     }
 
-    private void CreateDataForCards(String movieName, String ratings, String movieDescription) {
-        CardMovieDetails movie= new CardMovieDetails(movieName,ratings,movieDescription);
-        System.out.println(movieName+" "+ ratings+" "+movieDescription);
+    private void CreateDataForCards(String movieName, String ratings, String movieDescription, String backDropPath) {
+        CardMovieDetails movie= new CardMovieDetails(movieName,ratings,movieDescription,backDropPath);
         moviesArrayList.add(movie);
 
     }
