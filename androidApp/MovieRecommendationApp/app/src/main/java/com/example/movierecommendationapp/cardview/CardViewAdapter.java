@@ -5,12 +5,14 @@ import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.movierecommendationapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -48,6 +50,8 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.MovieV
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         CardMovieDetails movie = movies.get(position);
+        Glide.with(holder.movieImg).load(movies.get(position).getBackDropPath()).into(holder.movieImg);
+
         holder.setDetails(movie);
     }
 
@@ -58,10 +62,12 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.MovieV
 
     class MovieViewHolder extends RecyclerView.ViewHolder{
         private TextView movieName,movieRatings,movieDescription;
+        private ImageView movieImg;
         private com.google.android.material.button.MaterialButton addToFavButton;
 
         MovieViewHolder(View itemView){
             super(itemView);
+            movieImg=itemView.findViewById(R.id.movieImage);
             movieName=itemView.findViewById(R.id.movieName);
             movieRatings=itemView.findViewById(R.id.movieRatings);
             movieDescription=itemView.findViewById(R.id.movieDescription);
