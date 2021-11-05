@@ -24,9 +24,11 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,51 +61,35 @@ public class FavoritesActivity extends AppCompatActivity {
                 JSONObject postMovieIds = new JSONObject();
 
                 List<DocumentSnapshot> allSnaps = queryDocumentSnapshots.getDocuments();
-                for(DocumentSnapshot snapshot: allSnaps)
-                {
-                    ans+=snapshot.getString("favMovieId")+"\n";
+                for (DocumentSnapshot snapshot : allSnaps) {
+                    ans += snapshot.getString("favMovieId") + "\n";
                     allFavMovieIds.add(snapshot.getString("favMovieId"));
                 }
                 tempHolder.setText(ans);
                 try {
-                    postMovieIds.put("movieIds",allFavMovieIds);
-                }
-                catch (Exception e)
-                {
+                    JSONArray jsonArray=new JSONArray(allFavMovieIds);
+                    postMovieIds.put("movieIds", jsonArray);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
                 //Send POST request to backend
                 mQueue = Volley.newRequestQueue(FavoritesActivity.this);
-                 String URL="https://movie-recommender-fastapi.herokuapp.com/favorites/";
-               // String URL="http://127.0.0.1:8000/favorites";
+                String URL = "https://movie-recommender-fastapi.herokuapp.com/favorites/";
+                // String URL="http://127.0.0.1:8000/favorites";
                 System.out.println(postMovieIds);
-                JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, postMovieIds, new Response.Listener<JSONObject>() {
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, postMovieIds, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        System.out.println(response.toString());
+                        System.out.println(response);
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        error.printStackTrace();
                     }
-                }){@Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    Map<String, String> headers = new HashMap<>();
-                    headers.put("Content-Type", "application/json");
-                    return headers;
-                }};
-
-                mQueue.add(request);
-                
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(Exception e) {
-                Toast.makeText(FavoritesActivity.this, "Error Occurred", Toast.LENGTH_SHORT).show();
-                Log.d("Favs",e.toString());
-            }
-        });
-    }
+                });
+                mQueue.add(jsonObjectRequest);
 }
+});
+    }}
