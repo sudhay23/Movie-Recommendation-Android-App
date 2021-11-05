@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -141,6 +142,15 @@ public class CardViewActivity extends AppCompatActivity {
             case R.id.confirmNoItem:
                 return true;
             case R.id.confirmYesItem:
+                SharedPreferences prefs = this.getSharedPreferences("LoggedIn",MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.clear();
+                editor.commit();
+                prefs = this.getSharedPreferences("Register",MODE_PRIVATE);
+                editor = prefs.edit();
+                editor.clear();
+                editor.commit();
+
                 Intent logoutIntent = new Intent(this, MainActivity.class);
                 logoutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 logoutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

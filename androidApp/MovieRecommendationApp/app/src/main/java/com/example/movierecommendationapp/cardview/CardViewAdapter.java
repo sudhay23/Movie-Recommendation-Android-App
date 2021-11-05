@@ -76,7 +76,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.MovieV
                 @Override
                 public void onClick(View view) {
                     SharedPreferences prefs = context.getSharedPreferences("LoggedIn",Context.MODE_PRIVATE);
-                    String loggedInUser = prefs.getString("loggedIn","NoUserLoggedIn");
+                    String loggedInUser = prefs.getString("loggedin","NoUserLoggedIn");
                     Map<String,Object> newFavorite = new HashMap<>();
                     newFavorite.put("email",loggedInUser);
                     newFavorite.put("favMovieId",details.getMovieId());
