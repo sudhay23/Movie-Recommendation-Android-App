@@ -73,7 +73,7 @@ public class FavoritesActivity extends AppCompatActivity {
                 //Send POST request to backend
                 mQueue = Volley.newRequestQueue(FavoritesActivity.this);
                 String URL="https://movie-recommender-fastapi.herokuapp.com/favorites";
-                JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, postMovieIds, new Response.Listener<JSONObject>() {
+                JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, postMovieIds, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
 
