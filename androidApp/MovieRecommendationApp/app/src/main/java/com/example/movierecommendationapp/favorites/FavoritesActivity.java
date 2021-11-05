@@ -17,6 +17,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +29,7 @@ public class FavoritesActivity extends AppCompatActivity {
     String loggedInEmail;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     TextView tempHolder;
-    List<String> allFavMovieIds;
+
     String ans;
 
     @Override
@@ -34,8 +38,10 @@ public class FavoritesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_favorites);
 
         tempHolder = findViewById(R.id.tempHolder);
+        final ArrayList<String>[] arrayList = new ArrayList[]{null};
+
         ans = "";
-        allFavMovieIds = new ArrayList<>();
+
 
         SharedPreferences prefs = this.getSharedPreferences("LoggedIn", Context.MODE_PRIVATE);
         loggedInEmail = prefs.getString("loggedin","NoEmailLoggedIn");
@@ -48,9 +54,11 @@ public class FavoritesActivity extends AppCompatActivity {
                 for(DocumentSnapshot snapshot: allSnaps)
                 {
                     ans+=snapshot.getString("favMovieId")+"\n";
-                    allFavMovieIds.add(snapshot.getString("favMovieId"));
+                    arrayList= new ArrayList<String>();
+                    arrayList[0].add("tag"); // Add into list like this
+
                 }
-                tempHolder.setText(ans);
+               tempHolder.setText(ans);
                 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -60,5 +68,15 @@ public class FavoritesActivity extends AppCompatActivity {
                 Log.d("Favs",e.toString());
             }
         });
+        System.out.println(arrayList);
+        JSONObject json= new JSONObject();
+      /* JSONArray jsonArray = new JSONArray(arrayList);
+        try {
+            json.put("favorite",jsonArray);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }*/
+
+
     }
 }
