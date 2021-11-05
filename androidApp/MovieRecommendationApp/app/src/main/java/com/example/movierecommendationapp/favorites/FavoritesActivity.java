@@ -10,6 +10,12 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.movierecommendationapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -17,8 +23,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -29,8 +33,9 @@ public class FavoritesActivity extends AppCompatActivity {
     String loggedInEmail;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     TextView tempHolder;
-
+    ArrayList<String> allFavMovieIds;
     String ans;
+    private RequestQueue mQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +43,8 @@ public class FavoritesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_favorites);
 
         tempHolder = findViewById(R.id.tempHolder);
-        final ArrayList<String>[] arrayList = new ArrayList[]{null};
-
         ans = "";
-
+        allFavMovieIds = new ArrayList<>();
 
         SharedPreferences prefs = this.getSharedPreferences("LoggedIn", Context.MODE_PRIVATE);
         loggedInEmail = prefs.getString("loggedin","NoEmailLoggedIn");
@@ -50,15 +53,39 @@ public class FavoritesActivity extends AppCompatActivity {
         db.collection("favoriteMovies").whereEqualTo("email",loggedInEmail).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                JSONObject postMovieIds = new JSONObject();
+
                 List<DocumentSnapshot> allSnaps = queryDocumentSnapshots.getDocuments();
                 for(DocumentSnapshot snapshot: allSnaps)
                 {
                     ans+=snapshot.getString("favMovieId")+"\n";
-                    arrayList= new ArrayList<String>();
-                    arrayList[0].add("tag"); // Add into list like this
-
+                    allFavMovieIds.add(snapshot.getString("favMovieId"));
                 }
-               tempHolder.setText(ans);
+                tempHolder.setText(ans);
+                try {
+                    postMovieIds.put("movieIds",allFavMovieIds);
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+                //Send POST request to backend
+                mQueue = Volley.newRequestQueue(FavoritesActivity.this);
+                String URL="https://movie-recommender-fastapi.herokuapp.com/favorites";
+                JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, postMovieIds, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+
+                mQueue.add(request);
                 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -68,15 +95,5 @@ public class FavoritesActivity extends AppCompatActivity {
                 Log.d("Favs",e.toString());
             }
         });
-        System.out.println(arrayList);
-        JSONObject json= new JSONObject();
-      /* JSONArray jsonArray = new JSONArray(arrayList);
-        try {
-            json.put("favorite",jsonArray);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
-
-
     }
 }
