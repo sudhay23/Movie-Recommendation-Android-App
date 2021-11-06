@@ -31,6 +31,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -72,6 +73,7 @@ public class FavoritesActivity extends AppCompatActivity {
         progressBar=(ProgressBar)findViewById(R.id.progress_bar) ;
         mQueue = Volley.newRequestQueue(FavoritesActivity.this);
 
+        progressBarVisible();
 
         fetchResponseFromDatabaseAndAPI();
         CreateDataForCards("1234","Spiderman","10","very good","link","link");
@@ -121,9 +123,27 @@ public class FavoritesActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         System.out.println(response);
-                        CreateDataForCards("1234","Spiderman","10","very good","link","link");
-                        adapter.notifyDataSetChanged();
+                        JSONArray keys = response.names ();
+                        progressBarInVisible();
+                        for (int i = 0; i < keys.length(); i++) {
+                            try {
+                                String movieId=(String)keys.get(i);
+                                String movie_name=(response.getJSONObject((String) keys.get(i)).getString("original_title"));
+                                String description=(response.getJSONObject((String) keys.get(i)).getString("overview"));
+                                String ratings="Ratings : "+(response.getJSONObject((String) keys.get(i)).getString("vote_average"))+"/10";
+                                String backDropPath=(response.getJSONObject((String) keys.get(i)).getString("backdrop_path"));
+                                String posterPath=(response.getJSONObject((String) keys.get(i)).getString("poster_path"));
 
+                                if(description.length()>0){
+                                    CreateDataForCards(movieId,movie_name,description,ratings,backDropPath,posterPath);
+                                    adapter.notifyDataSetChanged();
+                                }
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
                 }, new Response.ErrorListener() {
                     @Override
