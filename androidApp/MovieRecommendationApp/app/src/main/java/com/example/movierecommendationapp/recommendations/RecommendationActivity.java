@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -41,7 +42,8 @@ public class RecommendationActivity extends AppCompatActivity {
 
     private RequestQueue mQueue;
     private ProgressBar progressBar;
-
+    private Intent intent;
+    private String movie_id;
 
 
     @Override
@@ -57,13 +59,12 @@ public class RecommendationActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         moviesArrayList=new ArrayList<>();
         progressBar=(ProgressBar)findViewById(R.id.progress_bar) ;
-
+        intent= getIntent() ;
+        movie_id = intent.getStringExtra("movie_id");
 
         mQueue= Volley.newRequestQueue(this);
         progressBarVisible();
         jsonParse();
-//        CreateDataForCards("Kabhi kushi kabhi gham","6.9","aaa aaa aaa aaa");
-        //      CreateDataForCards("Kabhi kushi kabhi gham","6.9","aaa aaa aaa aaa");
 
         adapter=new CardViewAdapter(this,moviesArrayList);
         recyclerView.setAdapter(adapter);
@@ -80,7 +81,7 @@ public class RecommendationActivity extends AppCompatActivity {
         recyclerView.setVisibility(View.VISIBLE);
     }
     private void jsonParse() {
-        String URL="https://movie-recommender-fastapi.herokuapp.com";
+        String URL="https://movie-recommender-fastapi.herokuapp.com/movie_id/"+movie_id;
         JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

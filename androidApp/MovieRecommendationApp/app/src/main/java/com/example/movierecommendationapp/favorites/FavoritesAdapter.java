@@ -85,9 +85,9 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
             showRecommendationsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(context, "Added "+details.getMovieId()+" as favorite", Toast.LENGTH_SHORT).show();
-                    Intent favIntent = new Intent(context, RecommendationActivity.class);
-                    context.startActivity(favIntent);                 }
+                    Intent intent = new Intent(context, RecommendationActivity.class);
+                    intent.putExtra("movie_id", details.getMovieId());
+                    context.startActivity(intent);                 }
             });
         }
     }
