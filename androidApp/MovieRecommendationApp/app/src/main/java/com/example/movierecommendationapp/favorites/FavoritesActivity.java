@@ -66,7 +66,7 @@ public class FavoritesActivity extends AppCompatActivity {
 
         prefs = this.getSharedPreferences("LoggedIn", Context.MODE_PRIVATE);
         loggedInEmail = prefs.getString("loggedin","NoEmailLoggedIn");
-        recyclerView=findViewById(R.id.recyclerViewCard);
+        recyclerView=findViewById(R.id.favoriterecyclerViewCard);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         moviesArrayList=new ArrayList<>();
         progressBar=(ProgressBar)findViewById(R.id.progress_bar) ;
@@ -160,4 +160,7 @@ public class FavoritesActivity extends AppCompatActivity {
         moviesArrayList.add(movie);
 
     }
+
+
+
 }

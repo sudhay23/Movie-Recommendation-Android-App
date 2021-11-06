@@ -41,7 +41,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
     @NonNull
     @Override
     public FavoritesAdapter.FavoritesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.card,parent,false);
+        View view= LayoutInflater.from(context).inflate(R.layout.favorites_card,parent,false);
         return new FavoritesAdapter.FavoritesViewHolder(view);
     }
 
@@ -61,7 +61,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
     class FavoritesViewHolder extends RecyclerView.ViewHolder{
         private TextView movieName,movieRatings,movieDescription;
         private ImageView movieImg;
-        private com.google.android.material.button.MaterialButton addToFavButton;
+        private com.google.android.material.button.MaterialButton showRecommendationsButton;
 
         FavoritesViewHolder(View itemView){
             super(itemView);
@@ -69,32 +69,18 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
             movieName=itemView.findViewById(R.id.movieName);
             movieRatings=itemView.findViewById(R.id.movieRatings);
             movieDescription=itemView.findViewById(R.id.movieDescription);
-            addToFavButton = itemView.findViewById(R.id.addToFavButton);
+            showRecommendationsButton = itemView.findViewById(R.id.showRecommendationsButton);
         }
 
         void setDetails(FavoritesDetails details){
             movieName.setText(String.format(Locale.US,details.getMovieName()));
             movieRatings.setText(String.format(Locale.US,details.getRatings()));
             movieDescription.setText(String.format(Locale.US,details.getMovieDescription()));
-            addToFavButton.setOnClickListener(new View.OnClickListener() {
+            showRecommendationsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    SharedPreferences prefs = context.getSharedPreferences("LoggedIn",Context.MODE_PRIVATE);
-                    String loggedInUser = prefs.getString("loggedin","NoUserLoggedIn");
-                    Map<String,Object> newFavorite = new HashMap<>();
-                    newFavorite.put("email",loggedInUser);
-                    newFavorite.put("favMovieId",details.getMovieId());
-                    db.collection("favoriteMovies").add(newFavorite).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            Toast.makeText(context, "Added "+details.getMovieName()+" as favorite", Toast.LENGTH_SHORT).show();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(Exception e) {
-                            Toast.makeText(context, "Error DB", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    Toast.makeText(context, "Added "+details.getMovieId()+" as favorite", Toast.LENGTH_SHORT).show();
+
                 }
             });
         }

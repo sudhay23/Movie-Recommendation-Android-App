@@ -14,7 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieRecommendationApp">
-        <activity android:name=".favorites.FavoritesActivity"></activity>
+        <activity
+            android:name=".recommendations.RecommendationActivity"
+            android:exported="true" />
+        <activity android:name=".favorites.FavoritesActivity" />
         <activity
             android:name=".cardview.CardViewActivity"
             android:exported="true" />

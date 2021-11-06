@@ -15,7 +15,7 @@
         tools:ignore="HardcodedText" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewCard"
+        android:id="@+id/favoriterecyclerViewCard"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
