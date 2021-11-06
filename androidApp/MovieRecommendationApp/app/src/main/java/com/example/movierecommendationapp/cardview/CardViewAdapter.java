@@ -1,6 +1,7 @@
 package com.example.movierecommendationapp.cardview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.movierecommendationapp.R;
+import com.example.movierecommendationapp.recommendations.RecommendationActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -63,7 +65,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.MovieV
     class MovieViewHolder extends RecyclerView.ViewHolder{
         private TextView movieName,movieRatings,movieDescription;
         private ImageView movieImg;
-        private com.google.android.material.button.MaterialButton addToFavButton;
+        private com.google.android.material.button.MaterialButton addToFavButton, recommendationsBtn;
 
         MovieViewHolder(View itemView){
             super(itemView);
@@ -72,7 +74,9 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.MovieV
             movieRatings=itemView.findViewById(R.id.movieRatings);
             movieDescription=itemView.findViewById(R.id.movieDescription);
             addToFavButton = itemView.findViewById(R.id.addToFavButton);
+            recommendationsBtn = itemView.findViewById(R.id.recommendationsBtn);
         }
+
 
         void setDetails(CardMovieDetails details){
             movieName.setText(String.format(Locale.US,details.getMovieName()));
@@ -99,6 +103,16 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.MovieV
                     });
                 }
             });
+
+            recommendationsBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, RecommendationActivity.class);
+                    intent.putExtra("movie_id", details.getMovieId());
+                    context.startActivity(intent);
+                }
+            });
+
         }
     }
 

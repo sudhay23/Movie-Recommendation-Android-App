@@ -10,7 +10,7 @@
         <entry key="app/src/main/res/layout/activity_recommendation.xml" value="0.22083333333333333" />
         <entry key="app/src/main/res/layout/activity_recommendedmovies.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/activity_show_movies.xml" value="0.1015625" />
-        <entry key="app/src/main/res/layout/card.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/card.xml" value="0.165" />
         <entry key="app/src/main/res/layout/card_views.xml" value="0.25" />
         <entry key="app/src/main/res/layout/editprofile_dialog.xml" value="0.25" />
         <entry key="app/src/main/res/layout/favorites_card.xml" value="0.25" />

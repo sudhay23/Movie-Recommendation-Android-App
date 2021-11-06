@@ -71,7 +71,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="10">
             <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -79,6 +80,16 @@
                 android:text="Add to favorites"
                 android:id="@+id/addToFavButton"
                 style="?attr/borderlessButtonStyle"
+                android:layout_weight="5"
+                />
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="Recommendations"
+                android:id="@+id/recommendationsBtn"
+                style="?attr/borderlessButtonStyle"
+                android:layout_weight="5"
                 />
 
         </LinearLayout>
