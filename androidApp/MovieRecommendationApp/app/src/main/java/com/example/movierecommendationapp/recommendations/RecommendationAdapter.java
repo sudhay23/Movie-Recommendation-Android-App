@@ -1,6 +1,7 @@
 package com.example.movierecommendationapp.recommendations;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,7 +64,7 @@ public class RecommendationAdapter  extends RecyclerView.Adapter<RecommendationA
     class MovieViewHolder extends RecyclerView.ViewHolder{
         private TextView movieName,movieRatings,movieDescription;
         private ImageView movieImg;
-        private com.google.android.material.button.MaterialButton addToFavButton;
+        private com.google.android.material.button.MaterialButton addToFavButton, recommendationsBtn;
 
         MovieViewHolder(View itemView){
             super(itemView);
@@ -72,6 +73,8 @@ public class RecommendationAdapter  extends RecyclerView.Adapter<RecommendationA
             movieRatings=itemView.findViewById(R.id.movieRatings);
             movieDescription=itemView.findViewById(R.id.movieDescription);
             addToFavButton = itemView.findViewById(R.id.addToFavButton);
+            recommendationsBtn = itemView.findViewById(R.id.recommendationsBtn);
+
         }
 
         void setDetails(RecommendationDetails details){
@@ -97,6 +100,14 @@ public class RecommendationAdapter  extends RecyclerView.Adapter<RecommendationA
                             Toast.makeText(context, "Error DB", Toast.LENGTH_SHORT).show();
                         }
                     });
+                }
+            });
+            recommendationsBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, RecommendationActivity.class);
+                    intent.putExtra("movie_id", details.getMovieId());
+                    context.startActivity(intent);
                 }
             });
         }
