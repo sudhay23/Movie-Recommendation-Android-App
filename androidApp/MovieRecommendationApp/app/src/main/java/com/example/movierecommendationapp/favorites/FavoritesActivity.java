@@ -52,7 +52,7 @@ public class FavoritesActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     SharedPreferences prefs;
     JSONObject postMovieIds;
-
+    JsonObjectRequest jsonObjectRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,12 +112,12 @@ public class FavoritesActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
+                if(allFavMovieIds.size()>0){
                 //Send POST request to backend
                 String URL = "https://movie-recommender-fastapi.herokuapp.com/favorites/";
                 // String URL="http://127.0.0.1:8000/favorites";
                 System.out.println(postMovieIds);
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, postMovieIds, new Response.Listener<JSONObject>() {
+                 jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, postMovieIds, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         System.out.println(response);
@@ -149,7 +149,12 @@ public class FavoritesActivity extends AppCompatActivity {
                         error.printStackTrace();
                     }
                 });
-                mQueue.add(jsonObjectRequest);
+                mQueue.add(jsonObjectRequest);}
+                else{
+                progressBarInVisible();
+
+                }
+
             }
         });
     }
