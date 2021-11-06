@@ -1,7 +1,9 @@
 package com.example.movierecommendationapp.favorites;
 
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +16,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.movierecommendationapp.ProfileActivity;
 import com.example.movierecommendationapp.R;
+import com.example.movierecommendationapp.cardview.CardViewActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.example.movierecommendationapp.recommendations.RecommendationActivity;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -80,8 +86,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
                 @Override
                 public void onClick(View view) {
                     Toast.makeText(context, "Added "+details.getMovieId()+" as favorite", Toast.LENGTH_SHORT).show();
-
-                }
+                    Intent favIntent = new Intent(context, RecommendationActivity.class);
+                    context.startActivity(favIntent);                 }
             });
         }
     }
