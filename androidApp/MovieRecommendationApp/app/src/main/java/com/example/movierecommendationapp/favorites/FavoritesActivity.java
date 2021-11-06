@@ -47,7 +47,6 @@ public class FavoritesActivity extends AppCompatActivity {
 
     String loggedInEmail;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    // TextView tempHolder;
     ArrayList<String> allFavMovieIds;
     private RequestQueue mQueue;
     private ProgressBar progressBar;
@@ -76,7 +75,6 @@ public class FavoritesActivity extends AppCompatActivity {
         progressBarVisible();
 
         fetchResponseFromDatabaseAndAPI();
-        CreateDataForCards("1234","Spiderman","10","very good","link","link");
 
         adapter=new FavoritesAdapter(FavoritesActivity.this,moviesArrayList);
         recyclerView.setAdapter(adapter);

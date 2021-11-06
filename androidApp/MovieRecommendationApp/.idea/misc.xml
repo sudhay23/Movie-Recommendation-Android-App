@@ -12,7 +12,7 @@
         <entry key="app/src/main/res/layout/card.xml" value="0.1" />
         <entry key="app/src/main/res/layout/card_views.xml" value="0.25" />
         <entry key="app/src/main/res/layout/editprofile_dialog.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/favorites_card.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/favorites_card.xml" value="0.25" />
       </map>
     </option>
   </component>
