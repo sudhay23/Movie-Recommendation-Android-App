@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_card_view.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_favorites.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_movieslist.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_recommendedmovies.xml" value="0.19791666666666666" />
@@ -11,6 +12,7 @@
         <entry key="app/src/main/res/layout/card.xml" value="0.1" />
         <entry key="app/src/main/res/layout/card_views.xml" value="0.25" />
         <entry key="app/src/main/res/layout/editprofile_dialog.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/favorites_card.xml" value="0.1" />
       </map>
     </option>
   </component>
