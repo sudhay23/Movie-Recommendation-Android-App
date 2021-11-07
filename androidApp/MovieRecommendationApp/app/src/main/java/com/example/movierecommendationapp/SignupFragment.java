@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -36,7 +37,7 @@ import java.util.Map;
 
 public class SignupFragment extends Fragment {
     boolean isUserValidated = false;
-    Button validateBtn, clearBtn, registerBtn, profilePicBtn;
+    Button validateBtn, clearBtn, registerBtn, profilePicBtn,loginTriggerFragmentBtn;
     EditText nameEditText,emailEditText,ageEditText,phoneEditText,passwordEditText,reenterpasswordEditText;
     TextView validationStatusTv;
     ImageView dpImageView;
@@ -45,6 +46,7 @@ public class SignupFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loginTriggerFragmentBtn = getActivity().findViewById(R.id.loginFragTrigger);
     }
 
     @Override
@@ -63,6 +65,7 @@ public class SignupFragment extends Fragment {
         phoneEditText = view.findViewById(R.id.phoneEditText);
         passwordEditText = view.findViewById(R.id.passwordEditText);
         reenterpasswordEditText = view.findViewById(R.id.reenterpasswordEditText);
+
 
         validationStatusTv = view.findViewById(R.id.validationStatusTv);
 
@@ -162,6 +165,11 @@ public class SignupFragment extends Fragment {
                         isUserValidated = false;
                     }
                 }
+                if(password1.length()<5)
+                {
+                    Toast.makeText(getActivity(), "Enter atleast 5 characters for password", Toast.LENGTH_LONG).show();
+                    isUserValidated = false;
+                }
 
 
                 if(isUserValidated==true)
@@ -187,49 +195,70 @@ public class SignupFragment extends Fragment {
             public void onClick(View v) {
                 if(isUserValidated==true)
                 {
-                    Toast.makeText(getActivity(),"Registering User...Proceed to Login",Toast.LENGTH_SHORT).show();
-
-                    SharedPreferences preferences = requireContext().getSharedPreferences("Register", Context.MODE_PRIVATE);
                     String name = nameEditText.getText().toString();
                     String email = emailEditText.getText().toString();
                     String password = passwordEditText.getText().toString();
                     String age = ageEditText.getText().toString();
                     String phno = phoneEditText.getText().toString();
-
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("Name",name);
-                    editor.putString("Email",email);
-                    editor.putString("Password",password);
-                    editor.putString("Age",age);
-                    editor.putString("Phno",phno);
-                    editor.commit();
-
-                    //Save the information on Firebase
-                    Map<String,Object> newUser = new HashMap<>();
-                    newUser.put("name",name);
-                    newUser.put("phno",phno);
-                    newUser.put("email",email);
-                    newUser.put("password",password);
-                    newUser.put("age",Integer.parseInt(age));
-
-                    db.collection("users").document(email).set(newUser).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    DocumentReference doc = db.collection("users").document(email);
+                    doc.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
-                        public void onSuccess(Void unused) {
-                            // Toast.makeText(getActivity().getApplicationContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if(documentSnapshot.getData()==null)
+                            {
+                                Toast.makeText(getActivity(),"Registering User...Proceed to Login",Toast.LENGTH_SHORT).show();
+
+                                SharedPreferences preferences = requireContext().getSharedPreferences("Register", Context.MODE_PRIVATE);
+
+
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.putString("Name",name);
+                                editor.putString("Email",email);
+                                editor.putString("Password",password);
+                                editor.putString("Age",age);
+                                editor.putString("Phno",phno);
+                                editor.commit();
+
+                                //Save the information on Firebase
+                                Map<String,Object> newUser = new HashMap<>();
+                                newUser.put("name",name);
+                                newUser.put("phno",phno);
+                                newUser.put("email",email);
+                                newUser.put("password",password);
+                                newUser.put("age",Integer.parseInt(age));
+
+                                db.collection("users").document(email).set(newUser).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                         Toast.makeText(getActivity(), "Registered Successfully", Toast.LENGTH_SHORT).show();
+                                         loginTriggerFragmentBtn.performClick();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(Exception e) {
+                                        Toast.makeText(getActivity(), "Error Saving to DB", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+                                });
+                            }
+                            else
+                            {
+                                Toast.makeText(getActivity(), "You are already a registered user", Toast.LENGTH_SHORT).show();
+                                loginTriggerFragmentBtn.performClick();
+                                return;
+                            }
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(Exception e) {
-                            Toast.makeText(getActivity(), "Error Saving to DB", Toast.LENGTH_SHORT).show();
-                            return;
+                            e.printStackTrace();
                         }
                     });
 
 
 
-                    //TEMPORARY ADDITION - Go To Login on Click
-                    Button loginTriggerFragmentBtn = getActivity().findViewById(R.id.loginFragTrigger);
-                    loginTriggerFragmentBtn.performClick();
+
+
                 }
                 else
                 {
