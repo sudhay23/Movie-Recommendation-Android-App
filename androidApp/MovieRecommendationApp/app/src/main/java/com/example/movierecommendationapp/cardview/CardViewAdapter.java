@@ -1,11 +1,16 @@
 package com.example.movierecommendationapp.cardview;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,6 +67,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.MovieV
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder{
+        int clicked;
         private TextView movieName,movieRatings,movieDescription;
         private ImageView movieImg;
         private com.google.android.material.button.MaterialButton addToFavButton, recommendationsBtn;
@@ -74,6 +80,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.MovieV
             movieDescription=itemView.findViewById(R.id.movieDescription);
             addToFavButton = itemView.findViewById(R.id.addToFavButton);
             recommendationsBtn = itemView.findViewById(R.id.recommendationsBtn);
+            clicked=0;
         }
 
 
@@ -102,6 +109,30 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.MovieV
                             Toast.makeText(context, "Error DB", Toast.LENGTH_SHORT).show();
                         }
                     });
+                }
+            });
+
+            movieImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final ObjectAnimator oa1 = ObjectAnimator.ofFloat(movieImg, "scaleX", 1f, 0f);
+                    final ObjectAnimator oa2 = ObjectAnimator.ofFloat(movieImg, "scaleX", 0f, 1f);
+                    oa1.setInterpolator(new DecelerateInterpolator());
+                    oa2.setInterpolator(new AccelerateDecelerateInterpolator());
+                    oa1.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            super.onAnimationEnd(animation);
+                            if (clicked==0)
+                            {movieImg.setImageResource(R.drawable.conjuring3);clicked=1;}
+                            else
+                            {Glide.with(holder.movieImg).load(movies.get(position).getBackDropPath()).into(holder.movieImg);clicked=0;}
+
+
+                            oa2.start();
+                        }
+                    });
+                    oa1.start();
                 }
             });
 
