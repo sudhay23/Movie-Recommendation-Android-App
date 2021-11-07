@@ -37,7 +37,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="16dp"
+                android:background="@color/black">
 
                 <!-- Title, secondary and supporting text -->
                 <TextView
@@ -46,6 +47,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/app_name"
                     android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textColor="@color/white"
                     />
                 <TextView
                     android:id="@+id/movieRatings"
@@ -54,7 +56,7 @@
                     android:layout_marginTop="8dp"
                     android:text="@string/app_name"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"
+                    android:textColor="@color/white"
                     />
                 <TextView
                     android:id="@+id/movieDescription"
@@ -62,8 +64,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/app_name"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
                     />
 
             </LinearLayout>
