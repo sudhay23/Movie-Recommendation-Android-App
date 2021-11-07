@@ -109,6 +109,8 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.MovieV
                             Toast.makeText(context, "Error DB", Toast.LENGTH_SHORT).show();
                         }
                     });
+                    addToFavButton.setEnabled(false);
+                    addToFavButton.setTextColor(1);
                 }
             });
 
