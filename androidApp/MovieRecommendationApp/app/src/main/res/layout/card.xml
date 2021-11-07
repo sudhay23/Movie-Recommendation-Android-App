@@ -87,6 +87,8 @@
                 android:id="@+id/addToFavButton"
                 style="?attr/borderlessButtonStyle"
                 android:layout_weight="5"
+                android:textColor="#9A2617"
+
                 />
             <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
@@ -96,6 +98,7 @@
                 android:id="@+id/recommendationsBtn"
                 style="?attr/borderlessButtonStyle"
                 android:layout_weight="5"
+                android:textColor="#003333"
                 />
 
         </LinearLayout>
