@@ -4,21 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:gravity="center"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:background="@drawable/background"
+    >
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingVertical="20dp"
-        android:background="#12FF00FB"
-        android:text="Get Movies Recommended..."
-        android:textSize="20sp"
-        android:layout_marginBottom="70dp"
+        android:layout_height="50dp"
+        android:text="Get Movies Recommended.."
+        android:textSize="25dp"
         android:fontFamily="sans-serif-light"
-        android:textColor="@color/purple_700"
+        android:textColor="@color/white"
+        android:layout_marginLeft="55dp"
+        android:layout_marginTop="120dp"
+        />
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginLeft="60dp"
+        android:src="@drawable/mickeymouse"
+        android:layout_marginBottom="20dp"
         />
     <Button
         android:layout_width="wrap_content"
@@ -28,6 +33,9 @@
         android:fontFamily="sans-serif-condensed-medium"
         android:paddingVertical="10dp"
         android:paddingHorizontal="30dp"
-        android:id="@+id/startBtn"/>
+        android:id="@+id/startBtn"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/gradient"/>
 
 </LinearLayout>

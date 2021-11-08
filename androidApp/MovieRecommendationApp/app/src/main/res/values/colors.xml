@@ -12,5 +12,6 @@
     <color name="green">#FF78D23D</color>
     <color name="orange">#ffa500</color>
     <color name="grey">#808080</color>
+    <color name="gradient">#ef629f</color>
 
 </resources>

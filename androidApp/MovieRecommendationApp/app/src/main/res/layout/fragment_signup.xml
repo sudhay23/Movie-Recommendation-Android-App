@@ -27,6 +27,8 @@
                     android:hint="Enter Name"
                     android:padding="10dp"
                     android:id="@+id/nameEditText"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
                     />
                 <EditText
                     android:layout_width="match_parent"
@@ -35,6 +37,8 @@
                     android:id="@+id/phoneEditText"
                     android:padding="10dp"
                     android:inputType="number"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
                     />
                 <EditText
                     android:layout_width="match_parent"
@@ -45,6 +49,8 @@
                     android:lines="5"
                     android:gravity="top|left"
                     android:padding="10dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
                     />
                 <EditText
                     android:layout_width="match_parent"
@@ -53,6 +59,8 @@
                     android:id="@+id/emailEditText"
                     android:padding="10dp"
                     android:inputType="textEmailAddress"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
                     />
                 <EditText
                     android:layout_width="match_parent"
@@ -61,6 +69,8 @@
                     android:id="@+id/passwordEditText"
                     android:padding="10dp"
                     android:inputType="textPassword"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
                     />
                 <EditText
                     android:layout_width="match_parent"
@@ -69,6 +79,8 @@
                     android:id="@+id/reenterpasswordEditText"
                     android:padding="10dp"
                     android:inputType="textPassword"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
                     />
 
                 <LinearLayout
@@ -83,7 +95,8 @@
                         android:textSize="12sp"
                         android:layout_marginBottom="20dp"
                         android:id="@+id/profilePicBtn"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/gradient"/>
                     <ImageView
                         android:layout_width="60dp"
                         android:layout_height="80dp"
@@ -101,7 +114,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Validation Status: "/>
+                        android:text="Validation Status: "
+                        android:textColor="@color/white" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -118,14 +132,16 @@
                         android:text="Validate"
                         android:layout_weight="1"
                         android:layout_marginHorizontal="15dp"
-                        android:id="@+id/validateBtn"/>
+                        android:id="@+id/validateBtn"
+                        android:backgroundTint="@color/gradient"/>
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Clear"
                         android:layout_weight="1"
                         android:layout_marginHorizontal="15dp"
-                        android:id="@+id/clearBtn"/>
+                        android:id="@+id/clearBtn"
+                        android:backgroundTint="@color/gradient"/>
                 </LinearLayout>
                 <Button
                     android:layout_width="match_parent"
@@ -134,7 +150,8 @@
                     android:layout_height="wrap_content"
                     android:text="Register"
                     android:enabled="false"
-                    android:id="@+id/registerBtn"/>
+                    android:id="@+id/registerBtn"
+                    android:backgroundTint="@color/gradient"/>
             </LinearLayout>
         </ScrollView>
 
