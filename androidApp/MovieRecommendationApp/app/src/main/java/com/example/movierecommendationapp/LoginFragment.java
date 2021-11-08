@@ -18,18 +18,28 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.movierecommendationapp.cardview.CardMovieDetails;
 import com.example.movierecommendationapp.cardview.CardViewActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginFragment extends Fragment {
 
-    Button clearBtn, loginBtn;
+    Button clearBtn, login;
     EditText emailEditText,passwordEditText;
     FirebaseFirestore db;
+
+    SharedPreferences sp;
+
+/*    public static final String filename="login";
+    public static final String emailid="email";
+    public static final String Password="password";*/
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,13 +53,20 @@ public class LoginFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
 
         clearBtn = view.findViewById(R.id.clearBtn);
-        loginBtn = view.findViewById(R.id.loginBtn);
+        login = view.findViewById(R.id.loginBtn);
         emailEditText = view.findViewById(R.id.emailEditText);
         passwordEditText = view.findViewById(R.id.passwordEditText);
 
 
 
-        loginBtn.setOnClickListener(new View.OnClickListener() {
+        sp = getActivity().getSharedPreferences("LoggedIn",Context.MODE_PRIVATE);
+        if(!sp.getString("loggedin","null").equals("null")){
+            Intent intent = new Intent(getContext(), CardViewActivity.class);
+            startActivity(intent);
+        }
+
+
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = emailEditText.getText().toString().trim();
@@ -60,9 +77,6 @@ public class LoginFragment extends Fragment {
                     return;
                 }
 
-//                SharedPreferences preferences = requireContext().getSharedPreferences("Register", Context.MODE_PRIVATE);
-//                String registeredEmail = preferences.getString("Email", "emailNotRegistered");
-//                String registeredPassword = preferences.getString("Password", "passwordNotMatching");
 
                 DocumentReference doc = db.collection("users").document(email);
                 doc.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -82,6 +96,7 @@ public class LoginFragment extends Fragment {
                                 SharedPreferences.Editor editor = prefs.edit();
                                 editor.putString("loggedin",email);
                                 editor.commit();
+                                /*sp.edit().putBoolean("loggedin",true).apply();*/
                                 Intent intent = new Intent(getContext(), CardViewActivity.class);
                                 startActivity(intent);
                             }
@@ -99,6 +114,8 @@ public class LoginFragment extends Fragment {
                         return;
                     }
                 });
+
+
 
 
 //                if(emailEditText.getText().toString().equals(registeredEmail)){
@@ -123,6 +140,9 @@ public class LoginFragment extends Fragment {
 
             }
         });
+
+
+
 
         clearBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,4 +175,6 @@ public class LoginFragment extends Fragment {
 
         return view;
     }
+
+
 }
