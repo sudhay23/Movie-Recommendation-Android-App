@@ -16,19 +16,25 @@
         android:theme="@style/Theme.MovieRecommendationApp">
         <activity
             android:name=".recommendations.RecommendationActivity"
+            android:label="Recommended Movies"
+
             android:exported="true" />
-        <activity android:name=".favorites.FavoritesActivity" />
+        <activity android:name=".favorites.FavoritesActivity"
+            android:label="Favourite Movies"/>
         <activity
             android:name=".cardview.CardViewActivity"
+            android:label="Our Catalog"
             android:exported="true">
 
         </activity>
 
         <activity android:name=".recommendedmovies" />
-        <activity android:name=".ShowMoviesActivity" />
+        <activity android:name=".ShowMoviesActivity"
+            android:label="Welcome"/>
         <activity
             android:name=".ProfileActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:label="Profile"/>
         <activity
             android:name=".movieslist"
             android:exported="true" />
