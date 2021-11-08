@@ -46,8 +46,9 @@ public class ProfileActivity extends AppCompatActivity implements UpdateProfileD
         btnSurfMovies.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),movieslist.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getApplicationContext(),movieslist.class);
+//                startActivity(intent);
+                finish();
             }
         });
 

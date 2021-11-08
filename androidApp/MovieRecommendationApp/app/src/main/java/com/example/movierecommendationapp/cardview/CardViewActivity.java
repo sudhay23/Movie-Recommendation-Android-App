@@ -148,10 +148,10 @@ public class CardViewActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.clear();
                 editor.commit();
-                prefs = this.getSharedPreferences("Register",MODE_PRIVATE);
-                editor = prefs.edit();
-                editor.clear();
-                editor.commit();
+//                prefs = this.getSharedPreferences("Register",MODE_PRIVATE);
+//                editor = prefs.edit();
+//                editor.clear();
+//                editor.commit();
 
                 Intent logoutIntent = new Intent(this, MainActivity.class);
                 logoutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
