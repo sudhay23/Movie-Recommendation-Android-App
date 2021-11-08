@@ -4,20 +4,30 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".UserLoginSignupActivity">
+    tools:context=".UserLoginSignupActivity"
+    android:background="@drawable/background">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingVertical="12dp"
-        android:background="@color/purple_100"
         android:text="Welcome"
         android:textSize="24sp"
         android:layout_marginBottom="20dp"
         android:fontFamily="sans-serif-light"
-        android:textColor="@color/purple_700"
+        android:textColor="@color/white"
+        android:layout_marginTop="50dp"
         />
+    <TextView
+        android:id="@+id/fillerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Choose an option to get started"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:layout_marginBottom="5dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,25 +38,23 @@
             android:layout_height="wrap_content"
             android:text="Login"
             android:layout_marginHorizontal="10dp"
-            android:id="@+id/loginFragTrigger"/>
+            android:id="@+id/loginFragTrigger"
+            android:backgroundTint="@color/gradient"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign Up"
             android:layout_marginHorizontal="10dp"
-            android:id="@+id/signupFragTrigger"/>
+            android:id="@+id/signupFragTrigger"
+            android:backgroundTint="@color/gradient"/>
     </LinearLayout>
+
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/fragmentHolder">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:id="@+id/fillerText"
-            android:text="Choose an option to get started"
-            android:layout_gravity="center"/>
+        android:id="@+id/fragmentHolder"
+        android:layout_width="369dp"
+        android:layout_height="637dp">
+
+
     </FrameLayout>
 
 
