@@ -47,6 +47,11 @@ public class SignupFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         loginTriggerFragmentBtn = getActivity().findViewById(R.id.loginFragTrigger);
+        SharedPreferences prefs = getActivity().getSharedPreferences("LoggedIn",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear();
+        editor.commit();
+
     }
 
     @Override

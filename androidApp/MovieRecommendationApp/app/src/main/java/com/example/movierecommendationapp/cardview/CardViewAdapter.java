@@ -57,6 +57,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.MovieV
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         CardMovieDetails movie = movies.get(position);
+        Glide.with(holder.movieImg).load(movies.get(position).getBackDropPath()).into(holder.movieImg);
 
         holder.setDetails(movie,holder, position);
     }
@@ -88,7 +89,6 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.MovieV
             movieName.setText(String.format(Locale.US,details.getMovieName()));
             movieRatings.setText(String.format(Locale.US,details.getRatings()));
             movieDescription.setText(String.format(Locale.US,details.getMovieDescription()));
-            Glide.with(holder.movieImg).load(movies.get(position).getBackDropPath()).into(holder.movieImg);
 
             addToFavButton.setOnClickListener(new View.OnClickListener() {
                 @Override
