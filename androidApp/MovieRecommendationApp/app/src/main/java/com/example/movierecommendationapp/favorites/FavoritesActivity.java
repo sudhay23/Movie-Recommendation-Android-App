@@ -80,7 +80,7 @@ public class FavoritesActivity extends AppCompatActivity {
             moviesArrayList.remove(position);
             adapter.notifyItemRemoved(position);
 
-            Snackbar.make(recyclerView,deletedMovie.getMovieName()+" deleted", BaseTransientBottomBar.LENGTH_LONG).setAction("Undo", new View.OnClickListener() {
+            Snackbar.make(recyclerView,deletedMovie.getMovieName()+" removed", BaseTransientBottomBar.LENGTH_LONG).setAction("Undo", new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     moviesArrayList.add(position,deletedMovie);
