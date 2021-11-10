@@ -27,6 +27,8 @@ import com.example.movierecommendationapp.cardview.CardMovieDetails;
 import com.example.movierecommendationapp.cardview.CardViewAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -62,7 +64,7 @@ public class FavoritesActivity extends AppCompatActivity {
         InitializeCardView();
 
     }
-
+    FavoritesDetails deletedMovie= null;
     ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -72,8 +74,19 @@ public class FavoritesActivity extends AppCompatActivity {
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
             int position = viewHolder.getAdapterPosition();
+
+            deletedMovie=moviesArrayList.get(position);
+
             moviesArrayList.remove(position);
             adapter.notifyItemRemoved(position);
+
+            Snackbar.make(recyclerView,deletedMovie.getMovieName(), BaseTransientBottomBar.LENGTH_LONG).setAction("Undo", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    moviesArrayList.add(position,deletedMovie);
+                    adapter.notifyItemInserted(position);
+                }
+            }).show();
 
         }
     };
