@@ -2,6 +2,7 @@ package com.example.movierecommendationapp.favorites;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -61,6 +62,22 @@ public class FavoritesActivity extends AppCompatActivity {
         InitializeCardView();
 
     }
+
+    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            int position = viewHolder.getAdapterPosition();
+            moviesArrayList.remove(position);
+            adapter.notifyItemRemoved(position);
+
+        }
+    };
+
     private void InitializeCardView() {
         allFavMovieIds = new ArrayList<>();
 
@@ -79,6 +96,8 @@ public class FavoritesActivity extends AppCompatActivity {
         adapter=new FavoritesAdapter(FavoritesActivity.this,moviesArrayList);
         recyclerView.setAdapter(adapter);
 
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
 
 
 
