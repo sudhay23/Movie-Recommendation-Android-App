@@ -47,6 +47,7 @@ public class FavoritesActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private FavoritesAdapter adapter;
     private ArrayList<FavoritesDetails> moviesArrayList;
+    private ArrayList<String> favMovieDocIds;
 
     String loggedInEmail;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -65,6 +66,7 @@ public class FavoritesActivity extends AppCompatActivity {
 
     }
     FavoritesDetails deletedMovie= null;
+    String deletedMovieFavDocId = null;
     ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -76,24 +78,53 @@ public class FavoritesActivity extends AppCompatActivity {
             int position = viewHolder.getAdapterPosition();
 
             deletedMovie=moviesArrayList.get(position);
-
+            deletedMovieFavDocId = favMovieDocIds.get(position);
             moviesArrayList.remove(position);
+            favMovieDocIds.remove(position);
             adapter.notifyItemRemoved(position);
 
-            Snackbar.make(recyclerView,deletedMovie.getMovieName()+" removed", BaseTransientBottomBar.LENGTH_LONG).setAction("Undo", new View.OnClickListener() {
+            Snackbar deleteSnackbar = Snackbar.make(recyclerView,deletedMovie.getMovieName()+" removed", Snackbar.LENGTH_LONG).setAction("Undo", new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     moviesArrayList.add(position,deletedMovie);
+                    favMovieDocIds.add(position,deletedMovieFavDocId);
                     adapter.notifyDataSetChanged();
                 }
-            }).show();
+            });
+            deleteSnackbar.setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE);
+            deleteSnackbar.addCallback(new BaseTransientBottomBar.BaseCallback<Snackbar>() {
+                @Override
+                public void onDismissed(Snackbar transientBottomBar, int event) {
+                    if(event==DISMISS_EVENT_CONSECUTIVE || event==DISMISS_EVENT_TIMEOUT)
+                    {
+                        //Delete the favorite movie entry from Firebase
+                        db.collection("favoriteMovies").document(deletedMovieFavDocId)
+                                    .delete()
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(FavoritesActivity.this, "Deleted '"+deletedMovie.getMovieName()+"' from favorites", Toast.LENGTH_SHORT).show();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    });
+                    }
+                    super.onDismissed(transientBottomBar, event);
+                }
+            });
+            deleteSnackbar.show();
 
         }
     };
 
     private void InitializeCardView() {
         allFavMovieIds = new ArrayList<>();
-
+        favMovieDocIds = new ArrayList<>();
+        
         prefs = this.getSharedPreferences("LoggedIn", Context.MODE_PRIVATE);
         loggedInEmail = prefs.getString("loggedin","NoEmailLoggedIn");
         recyclerView=findViewById(R.id.favoriterecyclerViewCard);
@@ -135,6 +166,7 @@ public class FavoritesActivity extends AppCompatActivity {
 
                 List<DocumentSnapshot> allSnaps = queryDocumentSnapshots.getDocuments();
                 for (DocumentSnapshot snapshot : allSnaps) {
+                    favMovieDocIds.add(snapshot.getId());
                     allFavMovieIds.add(snapshot.getString("favMovieId"));
                 }
                 //    tempHolder.setText(ans);
