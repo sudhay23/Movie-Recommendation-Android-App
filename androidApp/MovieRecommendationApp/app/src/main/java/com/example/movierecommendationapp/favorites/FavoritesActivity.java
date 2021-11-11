@@ -84,7 +84,7 @@ public class FavoritesActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     moviesArrayList.add(position,deletedMovie);
-                    adapter.notifyItemInserted(position);
+                    adapter.notifyDataSetChanged();
                 }
             }).show();
 
